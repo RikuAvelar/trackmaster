@@ -2,13 +2,12 @@
 
 angular.module('quickInitApp')
   .controller('MainCtrl', function TodoCtrl($scope, $location, TrackerStorage) {
-  	var tracker = $scope.tracker = TrackerStorage.get();
-
+  	$scope.tracker = TrackerStorage.get();
 	$scope.newCharacter = '';
 	$scope.editedCharacter = null;
 	$scope.movedCharacter = null;
 
-	var debouncedSave = _.debounce(function(){TrackerStorage.put(tracker)}, 500);
+	var debouncedSave = _.debounce(function(){TrackerStorage.put($scope.tracker)}, 500);
 
 	$scope.sortableOptions = {
 		update: function(e,ui){
@@ -17,16 +16,26 @@ angular.module('quickInitApp')
 		axis:'y'
 	};
 
+	function reorderTracker(){
+		$scope.tracker = _.sortBy($scope.tracker, function(character){
+			return 100 - character.init;
+		});
+	}
+
 	$scope.addCharacter = function(){
 		var newCharacter = $scope.newCharacter.trim();
 		if(newCharacter.length === 0) {
 			return;
 		}
-		tracker.push({
+
+		$scope.tracker.push({
 			name: newCharacter,
 			init: 0
 		});
-		TrackerStorage.put(tracker);
+
+		reorderTracker();
+
+		TrackerStorage.put($scope.tracker);
 
 		$scope.newCharacter = '';
 	};
@@ -39,13 +48,15 @@ angular.module('quickInitApp')
 	$scope.doneEditing = function (character) {
 		$scope.editedCharacter = null;
 		character.name = character.name.trim();
-		character.init = parseInt(character.init, 10) || 0;
+		character.init = parseFloat(character.init, 10) || 0;
 
 		if (!character.name){
 			$scope.removeCharacter(character);
 		}
 
-		TrackerStorage.put(tracker);
+		reorderTracker();
+
+		TrackerStorage.put($scope.tracker);
 	};
 
 	$scope.revertEditing = function (character) {
@@ -54,7 +65,7 @@ angular.module('quickInitApp')
 	}
 
 	$scope.removeCharacter = function (character) {
-		tracker = _.without(tracker, character);
-		TrackerStorage.put(tracker);
+		$scope.tracker = _.without($scope.tracker, character);
+		TrackerStorage.put($scope.tracker);
 	};
 });
