@@ -60,7 +60,7 @@ angular.module('quickInitApp')
 	};
 
 	$scope.revertEditing = function (character) {
-		tracker[tracker.indexOf(char)] = $scope.originalCharacter;
+		$scope.tracker[$scope.tracker.indexOf(character)] = $scope.originalCharacter;
 		$scope.doneEditing($scope.originalCharacter);
 	}
 
@@ -68,4 +68,16 @@ angular.module('quickInitApp')
 		$scope.tracker = _.without($scope.tracker, character);
 		TrackerStorage.put($scope.tracker);
 	};
+
+	$scope.moveCharacterDown = function (character) {
+		character.init = $scope.tracker[$scope.tracker.indexOf(character) + 1].init - 0.5;
+		reorderTracker();
+		TrackerStorage.put($scope.tracker);
+	}
+
+	$scope.moveCharacterUp = function (character) {
+		character.init = $scope.tracker[$scope.tracker.indexOf(character) - 1].init + 0.5;
+		reorderTracker();
+		TrackerStorage.put($scope.tracker);
+	}
 });
