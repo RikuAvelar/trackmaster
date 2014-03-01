@@ -2,8 +2,85 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
+$danger-color: #b94a48;
+$warning-color: #f0ad4e;
+$success-color: #5cb85c;
+$primary-color: #428bca;
+$deep-red: #700020;
+$grid-pattern: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAKklEQVQYV2N88eLFfwYgkJCQYATR2ABIDSOIwKcIphGnKegmj1CFxIYjABzVD8L6K8GjAAAAAElFTkSuQmCC);
+
 *{
     box-sizing: border-box;
+}
+
+/* Hides an element without truly hiding it, allowing forms to still be submitted */
+.collapsed-hidden{
+  width:0!important;
+  height:0!important;
+  display:block;
+  line-height:0!important;
+  border:0!important;
+  padding:0!important;
+  margin:0!important
+}
+
+.sprite-grid{
+  position:relative;
+  width:100%;
+  height: 800px;
+  min-width: 600px;
+  background: $grid-pattern repeat;
+}
+
+.sprite {
+  display:inline-block;
+  position: relative;
+  width:100px;
+  height:100px;
+  &.dragging{
+    margin: -5px 5px 5px -5px;
+    box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
+  }
+  .dead-overlay{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100,100,100,0.8)
+  }
+  .mover{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  .control-panel{
+    position:absolute;
+    bottom:-1.9em;
+  }
+  .badge {
+    position: absolute;
+    &.counter{
+      top: 5px;
+      left: 5px;
+      cursor: pointer;
+      &.active{
+        background-color:$primary-color;
+      }
+    }
+
+    &.health{
+      bottom: 5px;
+      right: 5px;
+      background-color: $success-color;
+      &.low{
+        background-color: $warning-color;
+        &.critical{
+          background-color: $danger-color;
+          &.dying{
+            background-color: $deep-red;
+          }
+        }
+      }
+    }
+  }
 }
 
 .browsehappy {

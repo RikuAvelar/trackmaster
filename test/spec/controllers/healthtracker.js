@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: InitTrackerCtrl', function () {
+describe('Controller: HealthTrackerCtrl', function () {
 
   // load the controller's module
   beforeEach(module('quickInitApp'));
 
-  var MainCtrl,
+  var HealthTrackerCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('InitTrackerCtrl', {
+    HealthTrackerCtrl = $controller('HealthTrackerCtrl', {
       $scope: scope
     });
   }));

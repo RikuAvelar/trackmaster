@@ -1,0 +1,46 @@
+<div ng-include src="'/views/header.html'"></div>
+
+<div class="jumbotron">
+  <h1>Health Tracker</h1>
+  <form id="char-form" ng-submit="addOrSaveCharacter()">
+    <!-- Input below is needed to be able to submit the form -->
+    <input type="submit" class="collapsed-hidden">
+    <div class="row">
+      <div class="form-group col-md-7" ng-class="{'has-error': errors.nameError}">
+        <input class="form-control input-lg" placeholder="Who joins the bloodbath?" ng-model="currentCharacter.name" autofocus>
+      </div>
+      <div class="form-group col-md-3" ng-class="{'has-error': errors.hpError}">
+        <input type="number" class="form-control input-lg" placeholder="HP" ng-model="currentCharacter.maxHealth">
+      </div>
+      <div class="col-md-2">
+        <button type="button" style="margin-top:-7px" class="btn btn-primary" ng-click="addCharacter()">
+          <span class="glyphicon glyphicon-plus-sign"></span>
+        </button>
+      </div>
+    </div>
+    <div class="row" ng-hide="!currentCharacter.id">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-danger" ng-click="deleteCharacter()">
+          Delete
+        </button>
+        <button type="button" class="btn btn-success" ng-click="addOrSaveCharacter()">
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="sprite-grid">
+  <div ng-repeat="char in characters track by $index" ng-dblclick="editCharacter(char)" ng-mousedown="sendToTop('#char-' + char.id)" ng-class="[char.sprite, 'sprite']" tooltip="{{char.name}}" id="char-{{char.id}}" ng-style="{top: char.position.top, left: char.position.left}">
+    <div class="dead-overlay" ng-hide="char.damage < char.maxHealth + 10"></div>
+    <form class="control-panel input-group input-group-sm" ng-submit="addDamage(char)">
+        <input type="number" class="form-control" ng-model="char.damageInPanel">
+        <span class="input-group-btn">
+          <button class="btn btn-danger"><span class="glyphicon glyphicon-certificate"></span></button>
+        </span>
+    </form>
+    <span class="badge counter" ng-class="{active: char.id == currentCharacter.id}" ng-click="editCharacter(char)">{{char.id}}</span>
+    <button class="btn btn-xs btn-primary mover" draggable draggable-target="#char-{{char.id}}" draggable-callback="updatePos(char, position)"><span class="glyphicon glyphicon-pushpin"></span></button>
+    <span class="badge health" ng-class="{low: char.damage / char.maxHealth >= 0.5, critical: char.damage / char.maxHealth >= 0.8, dying: char.damage >= char.maxHealth}">{{char.maxHealth - char.damage}} <small> /{{char.maxHealth}}</small></span>
+  </div>
+</div>

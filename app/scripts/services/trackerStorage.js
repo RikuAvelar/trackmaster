@@ -1,16 +1,27 @@
 'use strict';
 
 angular.module('quickInitApp')
-  .factory('TrackerStorage', function Trackerstorage() {
-    var STORAGE_ID = 'quick-init-tracker-store';
+  .factory('TrackerStorage', function Storage() {
+    var STORAGE_ID;
+    return {
+      get: function (storageKey) {
+        var storageId = storageKey || STORAGE_ID;
+        if(!storageId) {
+          return [];
+        }
+        return JSON.parse(localStorage.getItem(storageId) || '[]');
+      },
 
-	return {
-		get: function () {
-			return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-		},
+      put: function (chars, storageKey) {
+        var storageId = storageKey || STORAGE_ID;
+        if(!storageId) {
+          return null;
+        }
+        localStorage.setItem(storageId, JSON.stringify(chars));
+      },
 
-		put: function (todos) {
-			localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
-		}
-	};
-});
+      set: function (storageKey) {
+        STORAGE_ID = storageKey;
+      }
+    };
+  });

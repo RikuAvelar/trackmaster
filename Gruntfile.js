@@ -38,6 +38,13 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
+      sprites: {
+        files: ['icons/*.png'],
+        tasks: ['sprite'],
+        options: {
+          livereload: true
+        }
+      },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
@@ -106,6 +113,24 @@ module.exports = function (grunt) {
           jshintrc: 'test/.jshintrc'
         },
         src: ['test/spec/{,*/}*.js']
+      }
+    },
+
+    sprite:{
+      css: {
+        src: 'icons/*.png',
+        destImg: '.tmp/images/char-stylesheet.png',
+        destCSS: '.tmp/styles/sprites.css',
+        cssOpts: {
+          cssClass: function (item) {
+            return '.sprite.sprite-' + item.name;
+          }
+        }
+      },
+      json: {
+        src: 'icons/*.png',
+        destImg: '.tmp/images/char-stylesheet.png',
+        destCSS: '.tmp/scripts/sprites.json'
       }
     },
 
@@ -305,12 +330,14 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'sprite',
         'compass:server'
       ],
       test: [
         'compass'
       ],
       dist: [
+        'sprite',
         'compass:dist',
         'imagemin',
         'svgmin'

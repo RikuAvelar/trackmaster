@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: Trackerstorage', function () {
+describe('Service: TrackerStorage', function () {
 
   // load the service's module
   beforeEach(module('quickInitApp'));
 
   // instantiate service
-  var Trackerstorage;
-  beforeEach(inject(function (_Trackerstorage_) {
-    Trackerstorage = _Trackerstorage_;
+  var TrackerStorage;
+  beforeEach(inject(function (_TrackerStorage_) {
+    TrackerStorage = _TrackerStorage_;
   }));
 
   it('should do something', function () {
-    expect(!!Trackerstorage).toBe(true);
+    expect(!!TrackerStorage).toBe(true);
   });
 
 });
