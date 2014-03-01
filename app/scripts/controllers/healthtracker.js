@@ -14,7 +14,7 @@ angular.module('quickInitApp')
       return TrackerStorage.put($scope.characters);
     };
 
-    $http.get('/scripts/sprites.json').then(function(spriteList){
+    $http.get('scripts/sprites.json').then(function(spriteList){
       $scope.spriteList = _.map(_.keys(spriteList.data), function(spriteName){
         return 'sprite-' + spriteName;
       });
@@ -61,7 +61,7 @@ angular.module('quickInitApp')
         $scope.currentCharacter = _.clone(character);
       }
       var modalInstance = $modal.open({
-        templateUrl: '/views/modalConfirmation.html',
+        templateUrl: 'views/modalconfirmation.html',
         controller: 'ConfirmCtrl'
       });
 
@@ -77,7 +77,7 @@ angular.module('quickInitApp')
     $scope.selectSprite = function(){
       if(!_.isEmpty($scope.spriteList)) {
         var modalInstance = $modal.open({
-          templateUrl: '/views/spriteselector.html',
+          templateUrl: 'views/spriteselector.html',
           controller: 'SpriteselectorCtrl',
           resolve: {
             spriteList: function(){
