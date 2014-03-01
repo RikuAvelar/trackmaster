@@ -56,7 +56,10 @@ angular.module('quickInitApp')
       $scope.currentCharacter = {};
     };
 
-    $scope.deleteCharacter = function(){
+    $scope.deleteCharacter = function(character){
+      if (character) {
+        $scope.currentCharacter = _.clone(character);
+      }
       var modalInstance = $modal.open({
         templateUrl: '/views/modalConfirmation.html',
         controller: 'ConfirmCtrl'

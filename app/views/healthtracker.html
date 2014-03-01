@@ -47,6 +47,7 @@
     </form>
     <span class="badge counter" ng-class="{active: char.id == currentCharacter.id}" ng-click="editCharacter(char)">{{char.id}}</span>
     <button class="btn btn-xs btn-primary mover" draggable draggable-target="#char-{{char.id}}" draggable-callback="updatePos(char, position)"><span class="glyphicon glyphicon-pushpin"></span></button>
+    <button class="btn btn-xs btn-danger delete" ng-click="deleteCharacter(char)"><span class="glyphicon glyphicon-remove"></span></button>
     <span class="badge health" ng-class="{low: char.damage / char.maxHealth >= 0.5, critical: char.damage / char.maxHealth >= 0.8, dying: char.damage >= char.maxHealth}">{{char.maxHealth - char.damage}} <small> /{{char.maxHealth}}</small></span>
   </div>
 </div>

@@ -68,6 +68,11 @@ $grid-pattern: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAC
     top: 5px;
     right: 5px;
   }
+  .delete{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+  }
   .control-panel{
     position:absolute;
     bottom:-1.9em;
