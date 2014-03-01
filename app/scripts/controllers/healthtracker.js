@@ -1,17 +1,24 @@
 'use strict';
 
 angular.module('quickInitApp')
-  .controller('HealthTrackerCtrl', function ($scope, TrackerStorage, $modal) {
+  .controller('HealthTrackerCtrl', function ($scope, TrackerStorage, $modal, $http) {
     TrackerStorage.set('health-tracker');
     $scope.currentCharacter = {};
     $scope.errors = {};
     $scope.characters = TrackerStorage.get();
     $scope.location = '/health';
     $scope.Math = window.Math;
+    $scope.spriteList = {};
 
     var saveStorage = function(){
       return TrackerStorage.put($scope.characters);
     };
+
+    $http.get('/scripts/sprites.json').then(function(spriteList){
+      $scope.spriteList = _.map(_.keys(spriteList.data), function(spriteName){
+        return 'sprite-' + spriteName;
+      });
+    });
 
     $scope.addCharacter = function(){
       var character = _.clone($scope.currentCharacter);
@@ -62,6 +69,39 @@ angular.module('quickInitApp')
           saveStorage();
         }
       });
+    };
+
+    $scope.selectSprite = function(){
+      if(!_.isEmpty($scope.spriteList)) {
+        var modalInstance = $modal.open({
+          templateUrl: '/views/spriteselector.html',
+          controller: 'SpriteselectorCtrl',
+          resolve: {
+            spriteList: function(){
+              return $scope.spriteList;
+            },
+            selectedSprite: function() {
+              return ($scope.currentCharacter.sprite || '');
+            }
+          }
+        });
+
+        modalInstance.result.then(function(sprite){
+          $scope.currentCharacter.sprite = sprite;
+        });
+      }
+    };
+
+    $scope.spriteSelectorClass = function(){
+      if(!$scope.currentCharacter.sprite) {
+        return ['label label-default'];
+      } else {
+        return $scope.currentCharacter.sprite;
+      }
+    };
+
+    $scope.clearForm = function(){
+      $scope.currentCharacter = {};
     };
 
     $scope.addOrSaveCharacter = function(){

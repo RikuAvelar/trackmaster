@@ -7,7 +7,7 @@ angular.module('quickInitApp')
         draggableCallback: '&'
       },
       link: function(scope, element, attr) {
-        var startX = 0, startY = 0, x = 0, y = 0;
+        var startX = 0, startY = 0, x = 0, y = 0, moved = false;
         var targetName = attr.draggableTarget;
         var position = (element.css('position') || '').match(/relative|absolute/) || ['relative'];
 
@@ -15,13 +15,26 @@ angular.module('quickInitApp')
 
         if(!targetName) {
           element.css({
-           position: position
+            position: position
           }).addClass('draggable');
         }
 
         element.on('mousedown', function(event) {
           // Prevent default dragging of selected content
           var target = targetName ? angular.element(targetName) : element;
+
+          // Handle the first click's position
+          if (!moved) {
+            if(target.css('left')) {
+              x = target.position().left;
+            }
+            if(target.css('top')) {
+              y = target.position().top;
+            }
+          }
+
+          moved = true;
+
           target.addClass('dragging');
           event.preventDefault();
           startX = event.pageX - x;
@@ -42,7 +55,7 @@ angular.module('quickInitApp')
 
         function mouseup() {
           var target = targetName ? angular.element(targetName) : element;
-          var locals = {position: {top: target.css('top'), left: target.css('left')}}
+          var locals = {position: {top: target.css('top'), left: target.css('left')}};
 
           target.removeClass('dragging');
           scope.draggableCallback(locals);
@@ -51,5 +64,5 @@ angular.module('quickInitApp')
           $document.off('mouseup', mouseup);
         }
       }
-    }
+    };
   });

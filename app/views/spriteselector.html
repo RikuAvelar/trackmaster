@@ -1,0 +1,14 @@
+    <div class="modal-header">
+        <a class="close" ng-click="cancel()">&times;</a>
+         <h3>Select a Sprite</h3>
+    </div>
+    <div class="modal-body">
+        <label ng-repeat="spriteName in spriteList" class="sprite sprite-selector" ng-class="spriteName">
+          <div class="dead-overlay" ng-hide="options.selectedSprite == spriteName"></div>
+          <input type="radio" class="hidden" name="options.selectedSprite" ng-model="options.selectedSprite" ng-value="spriteName">
+        </label>
+    </div>
+    <div class="modal-footer">
+        <button ng-click="select()" class="btn btn-danger">Select</button>
+        <button ng-click="cancel()" class="btn btn-secondary">Cancel</button>
+    </div>

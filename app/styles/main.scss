@@ -32,11 +32,28 @@ $grid-pattern: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAC
   background: $grid-pattern repeat;
 }
 
+.oneline{
+  white-space:nowrap;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
 .sprite {
   display:inline-block;
   position: relative;
   width:100px;
   height:100px;
+  .glyphicon-user{
+    font-size:75px;
+    line-height: 100px;
+  }
+  &.sprite-selector{
+    cursor: pointer;
+  }
   &.dragging{
     margin: -5px 5px 5px -5px;
     box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);

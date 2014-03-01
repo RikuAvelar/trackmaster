@@ -5,21 +5,27 @@
   <form id="char-form" ng-submit="addOrSaveCharacter()">
     <!-- Input below is needed to be able to submit the form -->
     <input type="submit" class="collapsed-hidden">
-    <div class="row">
-      <div class="form-group col-md-7" ng-class="{'has-error': errors.nameError}">
-        <input class="form-control input-lg" placeholder="Who joins the bloodbath?" ng-model="currentCharacter.name" autofocus>
+    <div class="row oneline">
+      <div class="col-md-2 sprite vcenter sprite-selector" ng-click="selectSprite()" ng-class="spriteSelectorClass()">
+        <span ng-hide="currentCharacter.sprite" class="glyphicon glyphicon-user"></span>
       </div>
-      <div class="form-group col-md-3" ng-class="{'has-error': errors.hpError}">
+      <div class="form-group col-md-5 vcenter" ng-class="{'has-error': errors.nameError}">
+        <input class="form-control input-lg" placeholder="Name" ng-model="currentCharacter.name" autofocus>
+      </div>
+      <div class="form-group col-md-3 vcenter" ng-class="{'has-error': errors.hpError}">
         <input type="number" class="form-control input-lg" placeholder="HP" ng-model="currentCharacter.maxHealth">
       </div>
-      <div class="col-md-2">
-        <button type="button" style="margin-top:-7px" class="btn btn-primary" ng-click="addCharacter()">
+      <div class="col-md-2 vcenter">
+        <button type="button" class="btn btn-primary" ng-click="addCharacter()">
           <span class="glyphicon glyphicon-plus-sign"></span>
         </button>
       </div>
     </div>
     <div class="row" ng-hide="!currentCharacter.id">
       <div class="col-md-12">
+        <button type="button" class="btn btn-info" ng-click="clearForm()">
+          New
+        </button>
         <button type="button" class="btn btn-danger" ng-click="deleteCharacter()">
           Delete
         </button>
