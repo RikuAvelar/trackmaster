@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('quickInitApp')
-  .directive('charFocus', function ($timeout) {
+  .directive('charFocus', ['$timeout', function ($timeout) {
     return function (scope, elem, attrs) {
       scope.$watch(attrs.todoFocus, function (newVal) {
         if (newVal) {
@@ -11,4 +11,4 @@ angular.module('quickInitApp')
         }
       });
     };
-  });
+  }]);
