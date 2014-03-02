@@ -13,6 +13,19 @@ $grid-pattern: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAC
     box-sizing: border-box;
 }
 
+.jumbotron{
+  &.health-tracker{
+    position:relative;
+  }
+  .clear-all.btn{
+    font-size:12px;
+    padding: 6px;
+    position:absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
+
 /* Hides an element without truly hiding it, allowing forms to still be submitted */
 .collapsed-hidden{
   width:0!important;

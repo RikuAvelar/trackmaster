@@ -1,7 +1,8 @@
 <div ng-include src="'views/header.html'"></div>
 
-<div class="jumbotron">
+<div class="jumbotron health-tracker">
   <h1>Health Tracker</h1>
+  <button class="btn btn-danger clear-all" ng-click="clearAll()">Clear All</button>
   <form id="char-form" ng-submit="addOrSaveCharacter()">
     <!-- Input below is needed to be able to submit the form -->
     <input type="submit" class="collapsed-hidden">

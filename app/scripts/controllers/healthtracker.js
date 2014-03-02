@@ -74,6 +74,21 @@ angular.module('quickInitApp')
       });
     };
 
+    $scope.clearAll = function(){
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modalconfirmation.html',
+        controller: 'ConfirmCtrl'
+      });
+
+      modalInstance.result.then(function(confirmed){
+        if(confirmed){
+          $scope.characters = [];
+          $scope.currentCharacter = {};
+          saveStorage();
+        }
+      });
+    };
+
     $scope.selectSprite = function(){
       if(!_.isEmpty($scope.spriteList)) {
         var modalInstance = $modal.open({
