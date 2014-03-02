@@ -7,6 +7,10 @@ Trackmaster is built with Angular, using yeoman and generator-angular.
 
 Details to come, they are not exactly my thing.
 
+Icons
+==========
+In order to generate an icon list (I haven't tested the app without at least one Icon, and it may break otherwise), just add PNGs to /icons
+
 
 Todos
 ===========
