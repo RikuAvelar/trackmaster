@@ -1,6 +1,9 @@
 {
   "name": "TrackMaster",
   "private": true,
+  "scripts": {
+    "start": "node app.js"
+    },
   "license": "MIT",
   "version": "0.0.0",
   "devDependencies": {
@@ -49,5 +52,8 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "express": "~3.4.8"
   }
 }
