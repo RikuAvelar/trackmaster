@@ -335,7 +335,6 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'sprite',
         'compass:server'
       ],
       test: [
@@ -386,18 +385,26 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('serve', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
-
-    grunt.task.run([
+    var tasklist = [
       'clean:server',
       'bower-install',
+      'sprite',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
       'watch'
-    ]);
+    ];
+
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
+    }
+
+    if (target === 'simple' || target === 'dist') {
+      //Run without buildind sprites
+      tasklist.splice(2,1);
+    }
+
+    grunt.task.run(tasklist);
   });
 
   grunt.registerTask('server', function () {
