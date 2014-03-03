@@ -27,7 +27,9 @@ module.exports = function (grunt) {
     },
 
     bump: {
-      push: false //Don't automatically push when version is bumped
+      options:{
+        push: false //Don't automatically push when version is bumped
+      }
     },
 
     replace: {
