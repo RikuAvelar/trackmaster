@@ -10,7 +10,7 @@
 <ul id="char-list" class="list-group" ui-sortable ng-model="tracker">
   <li ng-class="{'list-group-item': true, 'editing': char == editedCharacter}" ng-repeat="char in tracker track by $index">
       <div class="view row">
-        <h3 ng-dblclick="editCharacter(char)" class="list-group-item-heading col-md-8">{{char.name}} <small>{{char.init}}</small></h4>
+        <h3 ng-dblclick="editCharacter(char)" class="list-group-item-heading col-md-8">{{char.name}} <small>{{char.init}}</small></h3>
         <div class="col-md-4 hover-only text-right">
           <button class="btn btn-default" ng-hide="$index == 0" ng-click="moveCharacterUp(char)">
             <span class="glyphicon glyphicon-chevron-up"></span>
