@@ -47,7 +47,7 @@
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "grunt-spritesmith": "~1.22.0",
     "grunt-bump": "0.0.13",
-    "grunt-replace": "~0.6.2"
+    "grunt-text-replace": "~0.3.11"
   },
   "engines": {
     "node": ">=0.8.0"

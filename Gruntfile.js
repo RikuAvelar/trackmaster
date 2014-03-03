@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      version: require('./package.json').version || '0.0.0',
+      version: 'v' + (require('./package.json').version || '0.0.0'),
       dist: 'dist'
     },
 
@@ -31,13 +31,14 @@ module.exports = function (grunt) {
     },
 
     replace: {
-      options: {
-        patterns : [{
-          match: '|%VERSION%|',
-          replacement: '<%= yeoman.version %>'
+      dist: {
+        src: ['dist/index.html', 'dist/views/*.html'],
+        overwrite: true,
+        replacements: [{
+          from: '@@VERSION@@',
+          to: '<%= yeoman.version %>'
         }]
-      },
-      files: ['dist/index.html', 'dist/views/*.html']
+      }
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -414,7 +415,7 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
-    if (target === 'simple' || target === 'dist') {
+    if (target === 'simple') {
       //Run without buildind sprites
       tasklist.splice(2,1);
     }
