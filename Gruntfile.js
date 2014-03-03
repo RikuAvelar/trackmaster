@@ -22,7 +22,22 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
+      version: require('./package.json').version || '0.0.0',
       dist: 'dist'
+    },
+
+    bump: {
+      push: false //Don't automatically push when version is bumped
+    },
+
+    replace: {
+      options: {
+        patterns : [{
+          match: '|%VERSION%|',
+          replacement: '<%= yeoman.version %>'
+        }]
+      },
+      files: ['dist/index.html', 'dist/views/*.html']
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -434,6 +449,7 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
+    'replace',
     'htmlmin'
   ]);
 
