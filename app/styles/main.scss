@@ -43,6 +43,9 @@ $grid-pattern: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAC
   height: 800px;
   min-width: 600px;
   background: $grid-pattern repeat;
+  .sprite{
+    position: absolute;
+  }
 }
 
 .oneline{

@@ -37,9 +37,24 @@ angular.module('quickInitApp')
         return;
       }
 
+      character.position = {top:0, left:0};
+
+      // Find an unused position
+
+      var samePosition = function(char){
+        var tempPosition = _.mapValues(character.position, function(pos){ return pos + 'px'; });
+        return tempPosition.left === char.position.left && tempPosition.top === char.position.top;
+      };
+      while(_.some($scope.characters, samePosition)) {
+        if (character.position.left + 100 >= 700) {
+          character.position.top += 150;
+        }
+        character.position.left = (character.position.left + 100) % 700;
+      }
+
       character.sprite = $scope.currentCharacter.sprite || 'sprite-brachy';
       character.damage = 0;
-      character.position = {};
+      character.position = _.mapValues(character.position, function(pos){ return pos + 'px'; });
       character.id = _.uniqueId();
 
       while(_.some($scope.characters, {id: character.id})) {
