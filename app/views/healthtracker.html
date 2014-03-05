@@ -37,6 +37,21 @@
     </div>
   </form>
 </div>
+
+<div class="sidebar-wrapper" ng-class="{active: sidebarActive}" ng-controller="InitTrackerCtrl">
+  <ul class="sidebar-nav sidebar-menu">
+       <li class="sidebar-brand"><a ng-click="sidebarActive = !sidebarActive">Initiative<span class="pull-right main-icon glyphicon glyphicon-align-justify"></span></a></li>
+  </ul>
+    <ul class="sidebar-nav">
+      <li ng-repeat="char in tracker track by $index">
+        <a class="row">
+          <span class="col-md-4"><span class="badge">{{char.init}}</span></span>
+          <span class="col-md-7 col-md-offset-1 text-right">{{char.name}}</span>
+        </a>
+      </li>
+    </ul>
+</div>
+
 <div class="sprite-grid">
   <div ng-repeat="char in characters track by $index" ng-dblclick="editCharacter(char)" ng-mousedown="sendToTop('#char-' + char.id)" class="sprite" ng-class="spriteClass(char.sprite)" tooltip="{{char.name}}" id="char-{{char.id}}" ng-style="{top: char.position.top, left: char.position.left, zIndex: char.id === currentCharacter.id ? 1 : ''}">
     <span ng-hide="char.sprite" class="glyphicon glyphicon-user"></span>

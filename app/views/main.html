@@ -7,7 +7,7 @@
   </form>
 </div>
 
-<ul id="char-list" class="list-group" ui-sortable ng-model="tracker">
+<ul id="char-list" class="list-group" ng-model="tracker">
   <li ng-class="{'list-group-item': true, 'editing': char == editedCharacter}" ng-repeat="char in tracker track by $index">
       <div class="view row">
         <h3 ng-dblclick="editCharacter(char)" class="list-group-item-heading col-md-8">{{char.name}} <small>{{char.init}}</small></h3>
