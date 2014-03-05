@@ -2,26 +2,27 @@
 
 angular.module('quickInitApp')
   .factory('TrackerStorage', function Storage() {
-    var STORAGE_ID;
     return {
       get: function (storageKey) {
-        var storageId = storageKey || STORAGE_ID;
-        if(!storageId) {
+        if(!storageKey) {
           return [];
         }
-        return JSON.parse(localStorage.getItem(storageId) || '[]');
+        return JSON.parse(localStorage.getItem(storageKey) || '[]');
       },
 
       put: function (chars, storageKey) {
-        var storageId = storageKey || STORAGE_ID;
-        if(!storageId) {
+        if(!storageKey) {
           return null;
         }
-        localStorage.setItem(storageId, JSON.stringify(chars));
+        localStorage.setItem(storageKey, JSON.stringify(chars));
       },
 
-      set: function (storageKey) {
-        STORAGE_ID = storageKey;
+      saveTo: function(storageKey, chars) {
+        return this.put(chars, storageKey);
+      },
+
+      bind: function (storageKey) {
+        return this.saveTo.bind(this, storageKey);
       }
     };
   });

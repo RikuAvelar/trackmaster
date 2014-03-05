@@ -2,16 +2,15 @@
 
 angular.module('quickInitApp')
   .controller('HealthTrackerCtrl', function ($scope, TrackerStorage, $modal, $http) {
-    TrackerStorage.set('health-tracker');
     $scope.currentCharacter = {};
     $scope.errors = {};
-    $scope.characters = TrackerStorage.get();
+    $scope.characters = TrackerStorage.get('health-tracker');
     $scope.location = '/health';
     $scope.Math = window.Math;
     $scope.spriteList = {};
 
     var saveStorage = function(){
-      return TrackerStorage.put($scope.characters);
+      return TrackerStorage.put($scope.characters, 'health-tracker');
     };
 
     var filterInt = function (value) {
