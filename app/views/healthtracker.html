@@ -7,7 +7,7 @@
     <!-- Input below is needed to be able to submit the form -->
     <input type="submit" class="collapsed-hidden">
     <div class="row oneline">
-      <div class="col-md-2 sprite vcenter sprite-selector" ng-click="selectSprite()" ng-class="spriteSelectorClass()">
+      <div class="col-md-2 sprite vcenter sprite-selector" ng-click="selectSprite()" ng-class="spriteClass(currentCharacter.sprite)">
         <span ng-hide="currentCharacter.sprite" class="glyphicon glyphicon-user"></span>
       </div>
       <div class="form-group col-md-5 vcenter" ng-class="{'has-error': errors.nameError}">
@@ -38,7 +38,8 @@
   </form>
 </div>
 <div class="sprite-grid">
-  <div ng-repeat="char in characters track by $index" ng-dblclick="editCharacter(char)" ng-mousedown="sendToTop('#char-' + char.id)" ng-class="[char.sprite, 'sprite']" tooltip="{{char.name}}" id="char-{{char.id}}" ng-style="{top: char.position.top, left: char.position.left, zIndex: char.id === currentCharacter.id ? 1 : ''}">
+  <div ng-repeat="char in characters track by $index" ng-dblclick="editCharacter(char)" ng-mousedown="sendToTop('#char-' + char.id)" class="sprite" ng-class="spriteClass(char.sprite)" tooltip="{{char.name}}" id="char-{{char.id}}" ng-style="{top: char.position.top, left: char.position.left, zIndex: char.id === currentCharacter.id ? 1 : ''}">
+    <span ng-hide="char.sprite" class="glyphicon glyphicon-user"></span>
     <div class="dead-overlay" ng-hide="char.damage < char.maxHealth + 10"></div>
     <form class="control-panel input-group input-group-sm" ng-submit="addDamage(char)">
         <input type="number" class="form-control" ng-model="char.damageInPanel">

@@ -58,7 +58,7 @@ angular.module('quickInitApp')
         character.position.left = (character.position.left + 100) % 700;
       }
 
-      character.sprite = $scope.currentCharacter.sprite || 'sprite-brachy';
+      character.sprite = $scope.currentCharacter.sprite || '';
       character.damage = 0;
       character.position = _.mapValues(character.position, function(pos){ return pos + 'px'; });
       character.id = _.uniqueId();
@@ -131,12 +131,8 @@ angular.module('quickInitApp')
       }
     };
 
-    $scope.spriteSelectorClass = function(){
-      if(!$scope.currentCharacter.sprite) {
-        return ['label label-default'];
-      } else {
-        return $scope.currentCharacter.sprite;
-      }
+    $scope.spriteClass = function(sprite){
+      return sprite || ['label label-default']
     };
 
     $scope.clearForm = function(){
