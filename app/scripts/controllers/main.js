@@ -9,7 +9,7 @@ angular.module('quickInitApp')
     $scope.location = '/';
 
     function saveStorage() {
-      return TrackerStorage.put($scope.tracker);
+      return TrackerStorage.put($scope.tracker, 'tracker-storage');
     }
 
     function reorderTracker(){
