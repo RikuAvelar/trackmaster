@@ -38,7 +38,7 @@
   </form>
 </div>
 <div class="sprite-grid">
-  <div ng-repeat="char in characters track by $index" ng-dblclick="editCharacter(char)" ng-mousedown="sendToTop('#char-' + char.id)" ng-class="[char.sprite, 'sprite']" tooltip="{{char.name}}" id="char-{{char.id}}" ng-style="{top: char.position.top, left: char.position.left}">
+  <div ng-repeat="char in characters track by $index" ng-dblclick="editCharacter(char)" ng-mousedown="sendToTop('#char-' + char.id)" ng-class="[char.sprite, 'sprite']" tooltip="{{char.name}}" id="char-{{char.id}}" ng-style="{top: char.position.top, left: char.position.left, zIndex: char.id === currentCharacter.id ? 1 : ''}">
     <div class="dead-overlay" ng-hide="char.damage < char.maxHealth + 10"></div>
     <form class="control-panel input-group input-group-sm" ng-submit="addDamage(char)">
         <input type="number" class="form-control" ng-model="char.damageInPanel">
