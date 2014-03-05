@@ -14,6 +14,12 @@ angular.module('quickInitApp')
       return TrackerStorage.put($scope.characters);
     };
 
+    var filterInt = function (value) {
+      if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
+        return Number(value);
+      return NaN;
+    }
+
     $http.get('scripts/sprites.json').then(function(spriteList){
       $scope.spriteList = _.map(_.keys(spriteList.data), function(spriteName){
         return 'sprite-' + spriteName;
@@ -39,8 +45,8 @@ angular.module('quickInitApp')
 
       character.position = {top:0, left:0};
 
-      // Find an unused position
 
+      // Find an unused position
       var samePosition = function(char){
         var tempPosition = _.mapValues(character.position, function(pos){ return pos + 'px'; });
         return tempPosition.left === char.position.left && tempPosition.top === char.position.top;
@@ -152,7 +158,10 @@ angular.module('quickInitApp')
     };
 
     $scope.addDamage = function(character){
-      character.damage += character.damageInPanel;
+      var damage = filterInt(character.damageInPanel);
+      if(_.isFinite(damage)) {
+        character.damage += damage;
+      }
       character.damageInPanel = '';
       saveStorage();
     };
