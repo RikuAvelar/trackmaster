@@ -18,3 +18,11 @@ Todos
 ===========
 
 * Tests (didn't make the tests, as this was just supposed to be a way to kill time)
+
+Changelog
+===========
+
+* v0.1.1 - Added better handling of text in Sidebar Tracker
+* v0.1.0 - Added Sidebar Initiative Tracker in Health Tracker (Issue 4), fixed issues 5 & 8
+* v0.0.2 - Fixed Issue #1 and a few other unmakred issues related to it
+* v0.0.1 - Initial Version : functional version of Health and Init Tracker
